@@ -8,7 +8,7 @@
 
 #import "DeveloperView.h"
 
-@interface DeveloperView ()
+@interface DeveloperView () <UITextFieldDelegate>
 
 
 @property(nonatomic, retain)UITextField *mServerUrlTxtField;
@@ -46,7 +46,8 @@
     CGFloat serverTxtTop = serverImgTop;
     _mServerUrlTxtField = [[UITextField alloc] initWithFrame:CGRectMake(serverTxtLeft, serverTxtTop, serverTxtWidth, serverTxtHeight)];
     _mServerUrlTxtField.borderStyle = UITextBorderStyleLine;
-    _mServerUrlTxtField.text = @"http://";
+    _mServerUrlTxtField.delegate = self;
+    _mServerUrlTxtField.text = @"http://192.168.90.149:8081";
     [self addSubview:_mServerUrlTxtField];
     
     //label
@@ -71,7 +72,8 @@
     CGFloat txtTop = imgTop;
     _mTxtField = [[UITextField alloc] initWithFrame:CGRectMake(txtLeft, txtTop, txtWidth, txtHeight)];
     _mTxtField.borderStyle = UITextBorderStyleLine;
-    _mTxtField.text = @"http://";
+    _mTxtField.delegate = self;
+    _mTxtField.text = @"http://192.168.90.149:8081/module/loginAction.do?method=index";
     [self addSubview:_mTxtField];
     
     CGFloat enterBtnHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:30];
@@ -126,6 +128,36 @@
     [label2 setFont:[UIFont fontWithName:@"Helvetica-Bold" size:[[BSPUtils sharedBSPUtils] adaptedNumber:23]]];
     [label2 setTextColor:[UIColor whiteColor]];
     [self addSubview:label2];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];//收起键盘
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    CGRect frame = textField.frame;
+    int offset = frame.origin.y + 32 - (self.frame.size.height - 260.0);
+    
+    //iPhone键盘高度216  iPad  键盘高度352
+    
+    
+    
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:0.3f];
+    
+    
+    //将视图y坐标向上移动offset个单位，以使下面有地方显示键盘
+    
+    if(offset > 0)
+        self.frame = CGRectMake(0.0f, -offset, self.frame.size.width, self.frame.size.height);
+    [UIView commitAnimations];
+}
+
+//编辑完成，视图恢复原状
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    self.frame =CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 }
 
 - (void)enterBtnAction:(id)sender {
