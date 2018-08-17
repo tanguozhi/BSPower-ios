@@ -12,6 +12,7 @@
 @protocol AppJSObjectDelegate <JSExport>
 
 -(void)jsLogout;
+-(void)jsShowBackButton:(BOOL)isShow;
 
 @end
 

@@ -45,6 +45,9 @@
 		99E1C4312125CB900076B4AC /* BSPAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E1C4302125CB900076B4AC /* BSPAlert.m */; };
 		99E1C43621264F500076B4AC /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 99E1C43521264F500076B4AC /* test.html */; };
 		99E1C456212663140076B4AC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99E1C455212663140076B4AC /* icon.png */; };
+		99E1C45821269EA50076B4AC /* test1.html in Resources */ = {isa = PBXBuildFile; fileRef = 99E1C45721269EA50076B4AC /* test1.html */; };
+		99E1C45A2126B9A20076B4AC /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 99E1C4592126B9A20076B4AC /* user.png */; };
+		99E1C45C2126BB3D0076B4AC /* password.png in Resources */ = {isa = PBXBuildFile; fileRef = 99E1C45B2126BB3D0076B4AC /* password.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +121,9 @@
 		99E1C4302125CB900076B4AC /* BSPAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPAlert.m; sourceTree = "<group>"; };
 		99E1C43521264F500076B4AC /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		99E1C455212663140076B4AC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		99E1C45721269EA50076B4AC /* test1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test1.html; sourceTree = "<group>"; };
+		99E1C4592126B9A20076B4AC /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
+		99E1C45B2126BB3D0076B4AC /* password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = password.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +215,8 @@
 		99669AB621257982006D207A /* image */ = {
 			isa = PBXGroup;
 			children = (
+				99E1C45B2126BB3D0076B4AC /* password.png */,
+				99E1C4592126B9A20076B4AC /* user.png */,
 				99E1C455212663140076B4AC /* icon.png */,
 				99E1C3EA212590D70076B4AC /* back.png */,
 				99E1C3DE212586F70076B4AC /* checkBox@2x.png */,
@@ -291,6 +299,7 @@
 		99E1C43421264F500076B4AC /* Script */ = {
 			isa = PBXGroup;
 			children = (
+				99E1C45721269EA50076B4AC /* test1.html */,
 				99E1C43521264F500076B4AC /* test.html */,
 			);
 			path = Script;
@@ -354,7 +363,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				99E1C3E3212586F70076B4AC /* checkBoxSelected@3x.png in Resources */,
+				99E1C45C2126BB3D0076B4AC /* password.png in Resources */,
 				99E1C3E0212586F70076B4AC /* checkBoxSelected@2x.png in Resources */,
+				99E1C45A2126B9A20076B4AC /* user.png in Resources */,
 				99669AA32125703E006D207A /* LaunchScreen.storyboard in Resources */,
 				99669AA02125703E006D207A /* Assets.xcassets in Resources */,
 				99E1C3EB212590D70076B4AC /* back.png in Resources */,
@@ -363,6 +374,7 @@
 				99669AB821257982006D207A /* server_img.png in Resources */,
 				99E1C3E2212586F70076B4AC /* checkBox@2x.png in Resources */,
 				99E1C43621264F500076B4AC /* test.html in Resources */,
+				99E1C45821269EA50076B4AC /* test1.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

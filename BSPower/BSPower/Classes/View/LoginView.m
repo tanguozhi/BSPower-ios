@@ -35,34 +35,34 @@
     view.backgroundColor = [UIColor whiteColor];
     [self addSubview:view];
     
-    CGFloat userImgHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:30];
-    CGFloat userImgLeft = [[BSPUtils sharedBSPUtils] adaptedNumber:10];
-    CGFloat userImgTop = [[BSPUtils sharedBSPUtils] adaptedNumber:10];
+    CGFloat userImgHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:20];
+    CGFloat userImgLeft = [[BSPUtils sharedBSPUtils] adaptedNumber:20];
+    CGFloat userImgTop = [[BSPUtils sharedBSPUtils] adaptedNumber:15];
     UIImageView *userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(userImgLeft, userImgTop, userImgHeight, userImgHeight)];
-    userImageView.image = [UIImage imageNamed:@"server_img.png"];
+    userImageView.image = [UIImage imageNamed:@"user.png"];
     [view addSubview:userImageView];
     
     //用户名输入框
-    CGFloat userTxtHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:30];
-    CGFloat userTxtWidth = CGRectGetWidth(self.frame)-CGRectGetMaxX(userImageView.frame)-[[BSPUtils sharedBSPUtils] adaptedNumber:10];
-    CGFloat userTxtLeft = CGRectGetMaxX(userImageView.frame);
+    CGFloat userTxtHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:20];
+    CGFloat userTxtLeft = CGRectGetMaxX(userImageView.frame)+[[BSPUtils sharedBSPUtils] adaptedNumber:5];
+    CGFloat userTxtWidth = CGRectGetWidth(self.frame)-userTxtLeft-[[BSPUtils sharedBSPUtils] adaptedNumber:15];
     CGFloat userTxtTop = userImgTop;
     _mUserTxtField = [[UITextField alloc] initWithFrame:CGRectMake(userTxtLeft, userTxtTop, userTxtWidth, userTxtHeight)];
     _mUserTxtField.placeholder = @"请输入用户名";
     _mUserTxtField.delegate = self;
     [view addSubview:_mUserTxtField];
     
-    CGFloat passImgHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:30];
-    CGFloat passImgLeft = [[BSPUtils sharedBSPUtils] adaptedNumber:10];
+    CGFloat passImgHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:20];
+    CGFloat passImgLeft = [[BSPUtils sharedBSPUtils] adaptedNumber:20];
     CGFloat passImgTop = CGRectGetMaxY(userImageView.frame)+[[BSPUtils sharedBSPUtils] adaptedNumber:20];
     UIImageView *passImageView = [[UIImageView alloc] initWithFrame:CGRectMake(passImgLeft, passImgTop, passImgHeight, passImgHeight)];
-    passImageView.image = [UIImage imageNamed:@"server_img.png"];
+    passImageView.image = [UIImage imageNamed:@"password.png"];
     [view addSubview:passImageView];
     
     //密码输入框
-    CGFloat passTxtHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:30];
-    CGFloat passTxtWidth = CGRectGetWidth(self.frame)-CGRectGetMaxX(userImageView.frame)-[[BSPUtils sharedBSPUtils] adaptedNumber:10];
-    CGFloat passTxtLeft = CGRectGetMaxX(userImageView.frame);
+    CGFloat passTxtHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:20];
+    CGFloat passTxtLeft = CGRectGetMaxX(userImageView.frame)+[[BSPUtils sharedBSPUtils] adaptedNumber:5];
+    CGFloat passTxtWidth = CGRectGetWidth(self.frame)-passTxtLeft-[[BSPUtils sharedBSPUtils] adaptedNumber:15];
     CGFloat passTxtTop = passImgTop;
     _mPassxtField = [[UITextField alloc] initWithFrame:CGRectMake(passTxtLeft, passTxtTop, passTxtWidth, passTxtHeight)];
     _mPassxtField.placeholder = @"请输入密码";
@@ -117,6 +117,13 @@
     enterBtn.backgroundColor = [[BSPUtils sharedBSPUtils] getColorFromHex:@"#4e96de"];
     [enterBtn addTarget:self action:@selector(enterBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:enterBtn];
+    
+    NSString *shadowColor = @"#b2c8e1";
+    enterBtn.clipsToBounds = false;
+    enterBtn.layer.shadowColor = [[BSPUtils sharedBSPUtils] getColorFromHex:shadowColor].CGColor;
+    enterBtn.layer.shadowOffset = CGSizeMake(0.f, [[BSPUtils sharedBSPUtils] adaptedNumber:5.0]);
+    enterBtn.layer.shadowRadius = [[BSPUtils sharedBSPUtils] adaptedNumber:3.f];
+    enterBtn.layer.shadowOpacity = 1.f;
 
     NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:LOGIN_USER_NAME];
     if (userName && ![@"" isEqualToString:userName]) {
@@ -158,6 +165,8 @@
     [label2 setFont:[UIFont fontWithName:@"Helvetica-Bold" size:[[BSPUtils sharedBSPUtils] adaptedNumber:23]]];
     [label2 setTextColor:[UIColor whiteColor]];
     [self addSubview:label2];
+    
+    
 }
 
 
@@ -210,6 +219,7 @@
     NSString *_body = [NSString stringWithFormat:@"userCode=%@&userPassword=%@", _mUserTxtField.text, _mPassxtField.text];
     NSData *body = [_body dataUsingEncoding:NSUTF8StringEncoding];
     [[NetworkUtils sharedNetworkUtils] startAsyn:url header:nil body:body method:@"post" delegate:self];
+//    [_mDelegate replace:@"webview" transition:@"UIViewAnimationTransitionFlipFromRight"];
 }
 
 /**connection请求成功后回调并返回请求结果.
