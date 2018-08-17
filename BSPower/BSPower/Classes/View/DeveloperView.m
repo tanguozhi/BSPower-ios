@@ -126,6 +126,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:_mServerUrlTxtField.text forKey:SERVER_URL];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    [[BSPConfig sharedBSPConfig] setServerUrl:_mServerUrlTxtField.text];
+    
     if (_mDelegate && [_mDelegate respondsToSelector:@selector(replace:transition:)]) {
         [_mDelegate replace:@"login" transition:@"UIViewAnimationTransitionFlipFromLeft"];
     }
