@@ -8,7 +8,6 @@
 #import <UIKit/UIKit.h>
 
 #define SERVER_URL @"server_url"
-#define WEBVIEW_URL @"webview_url"
 #define LOGIN_USER_NAME @"LOGINUSERNAME"
 #define LOGIN_USER_PASSWORD @"LOGINUSERPASSWORD"
 #define LOGIN_IS_SAVE_PASSWORD @"LOGINISSAVEPASSWORD"
@@ -18,10 +17,6 @@
 /** 获取XRUtils单例
  */
 +(BSPConfig *)sharedBSPConfig;
-
-- (NSString *)getWebUrl;
-
-- (void)setWebUrl:(NSString *)webUrl;
 
 - (NSString *)getServerUrl;
 

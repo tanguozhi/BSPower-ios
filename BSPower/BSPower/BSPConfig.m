@@ -8,7 +8,6 @@
 
 @interface BSPConfig()
 
-@property(nonatomic, copy)NSString *mWebUrl;
 @property(nonatomic, copy)NSString *mServerUrl;
 @property(nonatomic, assign)BOOL mHTTPSValidatesSecureCertificate;
 
@@ -24,20 +23,6 @@ static BSPConfig *_sharedBSPConfig = nil;
         _sharedBSPConfig = [[BSPConfig alloc] init];
     });
     return _sharedBSPConfig;
-}
-
-- (NSString *)getWebUrl {
-    if (!_mWebUrl) {
-        NSString *webUrl = [[NSUserDefaults standardUserDefaults] objectForKey:WEBVIEW_URL];
-        if (webUrl && ![@"" isEqualToString:webUrl]) {
-            _mWebUrl = webUrl;
-        }
-    }
-    return _mWebUrl;
-}
-
-- (void)setWebUrl:(NSString *)webUrl {
-    _mWebUrl = webUrl;
 }
 
 - (NSString *)getServerUrl {

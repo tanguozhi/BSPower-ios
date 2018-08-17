@@ -73,7 +73,7 @@
     
     UIWebView *webview = [[UIWebView alloc] initWithFrame:CGRectMake(0.0, navHeight, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-navHeight)];
     webview.backgroundColor = [UIColor grayColor];
-    NSString *url = [[BSPConfig sharedBSPConfig] getWebUrl];
+    NSString *url = [NSString stringWithFormat:@"%@/module/loginAction.do?method=index", [[BSPConfig sharedBSPConfig] getServerUrl]];;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
 
     [self addSubview:webview];

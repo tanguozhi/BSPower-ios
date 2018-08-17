@@ -12,7 +12,6 @@
 
 
 @property(nonatomic, retain)UITextField *mServerUrlTxtField;
-@property(nonatomic, retain)UITextField *mTxtField;
 @property(nonatomic, retain)id<ViewControllerDelegate> mDelegate;
 
 @end
@@ -50,47 +49,16 @@
     _mServerUrlTxtField.text = @"http://192.168.90.149:8081";
     [self addSubview:_mServerUrlTxtField];
     
-    //label
-    CGFloat labelHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:30];
-    CGFloat labelTop = CGRectGetMaxY(serverImageView.frame)+ [[BSPUtils sharedBSPUtils] adaptedNumber:20];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, labelTop, CGRectGetWidth(self.frame), labelHeight)];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = @"H5地址";
-    label.font = [UIFont systemFontOfSize:[[BSPUtils sharedBSPUtils] adaptedNumber:12]];
-    [self addSubview:label];
-    
-    CGFloat imgHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:30];
-    CGFloat imgLeft = [[BSPUtils sharedBSPUtils] adaptedNumber:10];
-    CGFloat imgTop = labelTop+labelHeight+[[BSPUtils sharedBSPUtils] adaptedNumber:10];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(imgLeft, imgTop, imgHeight, imgHeight)];
-    imageView.image = [UIImage imageNamed:@"server_img.png"];
-    [self addSubview:imageView];
-    
-    CGFloat txtHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:30];
-    CGFloat txtWidth = CGRectGetWidth(self.frame)-CGRectGetMaxX(imageView.frame)-[[BSPUtils sharedBSPUtils] adaptedNumber:10];
-    CGFloat txtLeft = CGRectGetMaxX(imageView.frame);
-    CGFloat txtTop = imgTop;
-    _mTxtField = [[UITextField alloc] initWithFrame:CGRectMake(txtLeft, txtTop, txtWidth, txtHeight)];
-    _mTxtField.borderStyle = UITextBorderStyleLine;
-    _mTxtField.delegate = self;
-    _mTxtField.text = @"http://192.168.90.149:8081/module/loginAction.do?method=index";
-    [self addSubview:_mTxtField];
-    
     CGFloat enterBtnHeight = [[BSPUtils sharedBSPUtils] adaptedNumber:30];
     CGFloat enterBtnWidth = CGRectGetWidth(self.frame)-2*[[BSPUtils sharedBSPUtils] adaptedNumber:10];
     CGFloat enterBtnLeft = [[BSPUtils sharedBSPUtils] adaptedNumber:10];
-    CGFloat enterBtnTop = CGRectGetMaxY(imageView.frame)+[[BSPUtils sharedBSPUtils] adaptedNumber:10];
+    CGFloat enterBtnTop = CGRectGetMaxY(serverImageView.frame)+[[BSPUtils sharedBSPUtils] adaptedNumber:10];
     UIButton *enterBtn = [[UIButton alloc] initWithFrame:CGRectMake(enterBtnLeft, enterBtnTop, enterBtnWidth, enterBtnHeight)];
     [enterBtn setTitle:@"确定" forState:UIControlStateNormal];
     enterBtn.backgroundColor = [UIColor redColor];
     [enterBtn addTarget:self action:@selector(enterBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:enterBtn];
     
-    
-    NSString *webUrl = [[NSUserDefaults standardUserDefaults] objectForKey:WEBVIEW_URL];
-    if (webUrl && ![@"" isEqualToString:webUrl]) {
-        _mTxtField.text = webUrl;
-    }
     
     NSString *serverUrl = [[NSUserDefaults standardUserDefaults] objectForKey:SERVER_URL];
     if (serverUrl && ![@"" isEqualToString:serverUrl]) {
@@ -140,21 +108,14 @@
     int offset = frame.origin.y + 32 - (self.frame.size.height - 260.0);
     
     //iPhone键盘高度216  iPad  键盘高度352
-    
-    
-    
     [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
     [UIView setAnimationDuration:0.3f];
-    
-    
+
     //将视图y坐标向上移动offset个单位，以使下面有地方显示键盘
-    
     if(offset > 0)
         self.frame = CGRectMake(0.0f, -offset, self.frame.size.width, self.frame.size.height);
     [UIView commitAnimations];
 }
-
-//编辑完成，视图恢复原状
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     self.frame =CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
@@ -163,10 +124,8 @@
 - (void)enterBtnAction:(id)sender {
     //存入数组并同步
     [[NSUserDefaults standardUserDefaults] setObject:_mServerUrlTxtField.text forKey:SERVER_URL];
-    [[NSUserDefaults standardUserDefaults] setObject:_mTxtField.text forKey:WEBVIEW_URL];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [[BSPConfig sharedBSPConfig] setWebUrl:_mTxtField.text];
     if (_mDelegate && [_mDelegate respondsToSelector:@selector(replace:transition:)]) {
         [_mDelegate replace:@"login" transition:@"UIViewAnimationTransitionFlipFromLeft"];
     }
