@@ -34,11 +34,11 @@
     
     self.backgroundColor = [UIColor blackColor];
     
-    NSString *url = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"];
+//    NSString *url = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"];
     
     UIWebView *webview = [[UIWebView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
     
-//    NSString *url = [[BSPConfig sharedBSPConfig] getWebUrl];
+    NSString *url = [[BSPConfig sharedBSPConfig] getWebUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
 
     [self addSubview:webview];
